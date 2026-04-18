@@ -1,0 +1,7 @@
+# Ignore everything
+*
+
+# But track these
+!.gitignore
+!CLAUDE.md
+!README.md

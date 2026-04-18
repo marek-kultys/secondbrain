@@ -1,0 +1,1 @@
+# Digital brain project based on Obsidian, Claude Code, and Git
