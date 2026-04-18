@@ -1,19 +1,104 @@
 ## Setting up new brain
+
+#### 1. Build structure
 On `set up new brain` command, create the following directory structure with files in the root directory where this file lives:
 ```
 /patterns
+/patterns/facts.md
 /patterns/log_entry.md
 /patterns/note.md
 /persona
 /raw
 /wiki
 checklist.md
+facts.md
 index.md
 log.md
 ```
+#### 2. Populate templates
+Populate `.md` documents in `patterns` directory with the following template specification:
+
+**`patterns/note.md`**
+```
+---
+name: Note Template
+description: Template for all wiki notes — one note per processed item from /raw
+type: template
+---
+
+## Frontmatter
+
+\```yaml
+---
+title:
+author:
+source:
+year_published:
+tags: []
+raw:
+type:  # academic-paper | opinion-piece | thought-leadership | my-writing | book | talk | article | interview | other
+read_status:  # read | unread
+---
+\```
+
+## Core idea
+*One or two sentences capturing the central argument or insight.*
+
+## Key principles
+- 
+
+## Connections
+- 
+
+## Timeline & context
+**Year discovered:** 
+**Related projects:** 
+*Note any ideas here that conflict with, build on, or evolved from other notes in the vault. Use this to layer the development of an idea over time.*
+
+## My notes
+*Your own reactions, disagreements, applications, and open questions.*
+```
+
+**`patterns/log_entry.md`**
+```
+---
+name: Log Entry Template
+description: Template for entries in /log.md — one entry per significant vault operation
+type: template
+---
+
+## YYYY-MM-DD HH:MM:SS — <Action Title>
+
+**Type:** process | edit | create | delete | restructure | other  
+**Scope:** <folder or files affected>
+
+<1–3 sentences: what changed and why>
+
+---
+```
+
+**`patterns/facts.md`**
+```
+---
+name: Fact Template
+description: Template for entries in /facts.md — one entry per generated fact
+type: template
+---
+
+## YYYY-MM-DD — <Fact title: a short declarative statement>
+
+<2–4 sentences stating the fact as an inference. Bold the key claim. Each sentence should add something — no padding.>
+
+**Sources:**
+- *<Title>*, <Author>, <Publication>, <Year>, <page or section reference>
+- *<Title>*, <Author>, <Publication>, <Year>, <page or section reference>
+- *<Title>*, <Author>, <Publication>, <Year>, <page or section reference>
+
+---
+```
+#### 3. Finish
 
 Once done, log this as first action in `log.md` adhering to brain rules and template patterns.
-
 Do this only once.
 
 
