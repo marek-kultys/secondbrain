@@ -43,6 +43,7 @@ On every `brain routine` command, do this:
 
 ## Generating a curious fact
 On every `get me a fact` command:
-1. Search through the stored knowledge and generate a new fact
-2. New fact must be an inference that spans at least 3 separate knowledge sources
+1. Search through the stored knowledge in `/raw` and `/wiki` and generate a new fact
+2. New fact must be an inference grounded in the vault; it must span at least 3 separate knowledge sources
 3. Summarise the fact in a few sentences and quote the sources (with page numbers)
+4. Prepend the new fact to `/facts.md` following `patterns/facts.md`
