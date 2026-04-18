@@ -1,9 +1,17 @@
-# Digital brain project based on Obsidian, Claude Code, and Git
+# Secondbrain
+
+##### Digital brain project based on Obsidian, Claude Code, and Git
+
+[secondbrain](https://github.com/marek-kultys/secondbrain)  was created by: [Marek Kultys](https://marekkultys.com/)
+
+First published: April 2026
 
 ---
 
 Knowledge structure with Obsidian
+
 Knowledge management with Claude Code
+
 Version control with Git
 
 --- 
