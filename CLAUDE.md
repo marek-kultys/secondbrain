@@ -1,4 +1,4 @@
-## SETUP
+## Setting up new brain
 On `set up new brain` command, create the following directory structure with files in the root directory where this file lives:
 ```
 /patterns
@@ -14,6 +14,8 @@ log.md
 
 Once done, log this as first action in `log.md` adhering to brain rules and template patterns.
 
+---
+
 ## Admin rules
 - Every significant vault operation must be logged in `/log.md` using the `patterns/log_entry.md` template
 - Log entries must include a full timestamp: `YYYY-MM-DD HH:MM:SS` — retrieve the current time via `date '+%H:%M:%S'` before writing each entry
@@ -21,12 +23,16 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 - All wiki notes must conform to `patterns/note.md`: meta frontmatter (name, description, type: template is for templates; notes use title/author/source/year_published/tags/raw/type) and five body sections (Core idea, Key principles, Connections, Timeline & context, My notes)
 - The controlled vocabulary for `type` lives only in `patterns/note.md` — never repeat it in individual wiki notes
 
+---
+
 ## Templates
 - For wiki notes: follow `patterns/note.md`
 - For log entries: follow `patterns/log_entry.md`
 - Always read the relevant template before creating a new document of that type
 
-## Brain Routine
+---
+
+## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
 1. Check if there are any new items in `/raw` that have not been processed into `/wiki`
 2. Process new items from `/raw` into `/wiki` using templates for notes and other documents described in `/patterns` (when you process document not created by me, always ask if I read them)
