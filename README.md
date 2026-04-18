@@ -1,6 +1,8 @@
 # Secondbrain
 
-##### Digital brain project based on Obsidian, Claude Code, and Git
+__Digital brain project based on Obsidian, Claude Code, and Git__
+
+---
 
 [secondbrain](https://github.com/marek-kultys/secondbrain)  was created by: [Marek Kultys](https://marekkultys.com/)
 
@@ -16,7 +18,7 @@ Version control with Git
 
 --- 
 
-Setup instructions:
+#### Setup instructions:
 1. Install Git (you can use [these instructions](https://github.com/git-guides/install-git) from GitHub)
 2. Install Claude Code by following [these instructions](https://code.claude.com/docs/en/quickstart) 
 3. Log into Claude Code in command line (you may need to set up a paid plan with Anthropic to run Claude Code)
