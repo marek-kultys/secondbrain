@@ -19,6 +19,7 @@ index.md
 log.md
 ```
 Delete `Welcome.md` if it exists in the root directory (Obsidian creates this file automatically).
+
 #### 2. Populate templates
 Populate `.md` documents in `patterns` directory with the following template specification:
 
@@ -107,6 +108,7 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 
 ## Admin rules
 - This Obsisian vault is my digital brain. I store raw information in `raw/` and you index and manage it in `wiki/`. Use `wiki/` to retrieve information when asked about anything.
+- `index.md` is a flat catalogue of all notes in `wiki/`, grouped by folder, with a total count and last-updated date in the header. Follow `patterns/index.md`. List entries as plain text titles — no wiki links. Update `index.md` when `brain routine` is run.
 - Every significant vault operation (structural change, new knowledge, update to key documents) must be logged in `log.md` using the `patterns/log_entry.md` template.
 - Log entries must include a full timestamp: `YYYY-MM-DD HH:MM:SS` — retrieve the current time via `date '+%H:%M:%S'` before writing each entry.
 - Log entries are prepended (newest at top).
@@ -117,18 +119,20 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 ## Templates
 - For wiki notes: follow `patterns/note.md`
 - For log entries: follow `patterns/log_entry.md`
+- For index: follow `patterns/index.md`
 - Always read the relevant template before creating a new document of that type
 
 
 ## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
-1. Check if there are any new items in `raw/` that have not been processed into `wiki/`
-2. Process new items from `raw/` into `wiki/` using templates for notes and other documents described in `patterns/` (when you process document not created by me, always ask if I read them)
-3. Clean up the brain, check if links are complete, check if there are any unaccounted for documents, and if all `wiki/` adhere to relevant patterns — update where needed
-4. Update `index.md`
-5. Once done, update `log.md` to capture what changed
-6. In terminal, print a short message summarising what has been done
-1
+1. Compare `index.md` to items in `raw/` and `wiki/` — if there are new documents in `raw/` they will need to be processed
+2. Process new documents from `raw/` into `wiki/` using templates described in `patterns/` (NOTE: when you process document not created by me, always ask if I read them)
+3. Update files in `persona/` based on the new documents
+4. Clean up the brain, check if links are complete, check if there are any unaccounted for documents, and if all `wiki/` adhere to relevant patterns — fix paths and patterns where needed
+5. Update `index.md`
+6. Once done, update `log.md` to capture what changed
+7. In terminal, print a short message summarising what has been done
+
 
 ## Generating a curious fact
 On every `get me a fact` or `get a new fact` command:
