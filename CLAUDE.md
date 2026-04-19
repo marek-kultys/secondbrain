@@ -18,6 +18,7 @@ facts.md
 index.md
 log.md
 ```
+Delete `Welcome.md` if it exists in the root directory (Obsidian creates this file automatically).
 #### 2. Populate templates
 Populate `.md` documents in `patterns` directory with the following template specification:
 
