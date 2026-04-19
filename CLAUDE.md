@@ -1,3 +1,5 @@
+
+# Instructions for Claude Code
 ## Setting up new brain
 Do this only once when setting up the vault. Do not set up a new brain if there is a `raw/` or `wiki/` directory.
 
