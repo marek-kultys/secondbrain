@@ -125,13 +125,17 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 
 ## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
-1. Compare `index.md` to items in `raw/` and `wiki/` — if there are new documents in `raw/` they will need to be processed
-2. Process new documents from `raw/` into `wiki/` using templates described in `patterns/` (NOTE: when you process document not created by me, always ask if I read them)
-3. Update files in `persona/` based on the new documents
-4. Clean up the brain, check if links are complete, check if there are any unaccounted for documents, and if all `wiki/` adhere to relevant patterns — fix paths and patterns where needed
-5. Update `index.md`
-6. Once done, update `log.md` to capture what changed
-7. In terminal, print a short message summarising what has been done
+
+1. **Detect unprocessed items:** Compare files in `raw/` directly against notes in `wiki/` — identify raw files with no corresponding wiki note. Also check the reverse: wiki notes whose `raw:` path points to a file that does not exist (orphaned or misfiled).
+2. **Process new items:** For each unprocessed raw file, create a wiki note following `patterns/note.md`. When processing a document not created by me, always ask if I read it first.
+3. **Update `persona/`:** If any new `raw/about-me/` items were processed, update the relevant `persona/` documents to reflect the new information.
+4. **Validate raw paths:** For every wiki note, verify that the file(s) in the `raw:` frontmatter field exist at that exact path. Fix any broken or missing subdirectory references.
+5. **Check MOC currency:** For each MOC document, verify that all notes in its folder are listed and the note count is accurate. Update where needed.
+6. **Flag stubs:** Identify notes where Core idea or Key principles are empty or contain only placeholder text. Report these — do not auto-fill.
+7. **Check template compliance:** Verify all wiki notes (excluding MOCs) have the required frontmatter fields and five body sections.
+8. **Update `index.md`:** Ensure count matches actual wiki note total, all folders and notes are listed, and no wiki links are present.
+9. **Update `log.md`** to capture what changed (prepend, latest first).
+10. **Print a short summary** in terminal.
 
 
 ## Generating a curious fact
