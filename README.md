@@ -33,4 +33,4 @@ Version control with Git
 	5. In Obsidian open command line developer console (if you're using Terminal, do this by clicking on the "Open command palette" button in the side bar and selecting "Terminal: Open root directory in terminal: Integrated")
 	6. In console, run `claude` to launch Claude Code in your Obsidian vault (you may need to confirm if you trust the folder)
 	7. Ask Claude to set up the secondbrain structure by running `set up new brain`
-	8. All should be done, check the `/log.md` folder to see if there is the first log
+	8. All should be done, check `log.md` to see if there is the first log

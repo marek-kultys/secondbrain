@@ -1,15 +1,16 @@
 ## Setting up new brain
+Do this only once when setting up the vault. Do not set up a new brain if there is a `raw/` or `wiki/` directory.
 
 #### 1. Build structure
 On `set up new brain` command, create the following directory structure with files in the root directory where this file lives:
 ```
-/patterns
-/patterns/facts.md
-/patterns/log_entry.md
-/patterns/note.md
-/persona
-/raw
-/wiki
+patterns/
+patterns/facts.md
+patterns/log_entry.md
+patterns/note.md
+persona/
+raw/
+wiki/
 checklist.md
 facts.md
 index.md
@@ -22,7 +23,7 @@ Populate `.md` documents in `patterns` directory with the following template spe
 ```
 ---
 name: Note Template
-description: Template for all wiki notes — one note per processed item from /raw
+description: Template for all wiki notes — one note per processed item from raw/
 type: template
 ---
 
@@ -63,7 +64,7 @@ read_status:  # read | unread
 ```
 ---
 name: Log Entry Template
-description: Template for entries in /log.md — one entry per significant vault operation
+description: Template for entries in log.md — one entry per significant vault operation
 type: template
 ---
 
@@ -81,7 +82,7 @@ type: template
 ```
 ---
 name: Fact Template
-description: Template for entries in /facts.md — one entry per generated fact
+description: Template for entries in facts.md — one entry per generated fact
 type: template
 ---
 
@@ -99,12 +100,11 @@ type: template
 #### 3. Finish
 
 Once done, log this as first action in `log.md` adhering to brain rules and template patterns.
-Do this only once.
 
 
 ## Admin rules
-- This Obsisian vault is my digital brain. I store raw information in `/raw` and you index and manage it in `/wiki`. Use `/wiki` to retrieve information when asked about anything.
-- Every significant vault operation (structural change, new knowledge, update to key documents) must be logged in `/log.md` using the `patterns/log_entry.md` template.
+- This Obsisian vault is my digital brain. I store raw information in `raw/` and you index and manage it in `wiki/`. Use `wiki/` to retrieve information when asked about anything.
+- Every significant vault operation (structural change, new knowledge, update to key documents) must be logged in `log.md` using the `patterns/log_entry.md` template.
 - Log entries must include a full timestamp: `YYYY-MM-DD HH:MM:SS` — retrieve the current time via `date '+%H:%M:%S'` before writing each entry.
 - Log entries are prepended (newest at top).
 - All wiki notes must conform to `patterns/note.md`: meta frontmatter (name, description, type: template is for templates; notes use title/author/source/year_published/tags/raw/type) and five body sections (Core idea, Key principles, Connections, Timeline & context, My notes).
@@ -119,16 +119,17 @@ Do this only once.
 
 ## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
-1. Check if there are any new items in `/raw` that have not been processed into `/wiki`
-2. Process new items from `/raw` into `/wiki` using templates for notes and other documents described in `/patterns` (when you process document not created by me, always ask if I read them)
-3. Clean up the brain, checking if links are complete, if there are any unaccounted for documents, and if all `/wiki` adhere to relevant patterns — update where needed 
-4. Once done, update `/log.md` to capture what changed
-5. In terminal, print a short message summarising what has been done
-
+1. Check if there are any new items in `raw/` that have not been processed into `wiki/`
+2. Process new items from `raw/` into `wiki/` using templates for notes and other documents described in `patterns/` (when you process document not created by me, always ask if I read them)
+3. Clean up the brain, check if links are complete, check if there are any unaccounted for documents, and if all `wiki/` adhere to relevant patterns — update where needed
+4. Update `index.md`
+5. Once done, update `log.md` to capture what changed
+6. In terminal, print a short message summarising what has been done
+1
 
 ## Generating a curious fact
 On every `get me a fact` or `get a new fact` command:
-1. Search through the stored knowledge in `/raw` and `/wiki` and generate a new fact
+1. Search through the stored knowledge in `index.md`, `wiki/` and `raw/` and generate a new fact
 2. New fact must be an inference grounded in the vault; it must span at least 3 separate knowledge sources
 3. Summarise the fact in a few sentences and quote the sources (with page numbers)
-4. Prepend the new fact to `/facts.md` following `patterns/facts.md`
+4. Prepend the new fact to `facts.md` following `patterns/facts.md`
