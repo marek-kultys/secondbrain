@@ -4,7 +4,7 @@ __Digital brain project based on Obsidian, Claude Code, and Git__
 
 ---
 
-[secondbrain](https://github.com/marek-kultys/secondbrain)  was created by: [Marek Kultys](https://marekkultys.com/)
+[secondbrain](https://github.com/marek-kultys/secondbrain)  was created by: [Marek Kultys](https://github.com/marek-kultys)
 
 First published: April 2026
 
