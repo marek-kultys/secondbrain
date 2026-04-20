@@ -111,10 +111,10 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 - `index.md` is a flat catalogue of all notes in `wiki/`, grouped by folder, with a total count and last-updated date in the header. Follow `patterns/index.md`. List entries as plain text titles — no wiki links. Update `index.md` when `brain routine` is run.
 - Every significant vault operation (structural change, new knowledge, update to key documents) must be logged in `log.md` using the `patterns/log_entry.md` template.
 - Log entries must include a full timestamp: `YYYY-MM-DD HH:MM:SS` — retrieve the current time via `date '+%H:%M:%S'` before writing each entry.
-- Log entries are prepended (newest at top).
+- New log entries in `log.md` and new facts in `facts.md` are prepended (newest at top).
 - All wiki notes must conform to `patterns/note.md`: meta frontmatter (name, description, type: template is for templates; notes use title/author/source/year_published/tags/raw/type) and five body sections (Core idea, Key principles, Connections, Timeline & context, My notes).
 - The controlled vocabulary for `type` lives only in `patterns/note.md` — never repeat it in individual wiki notes.
-- `log.md` must contain no `[[wikilinks]]` of any kind — no links to wiki notes, no links to patterns/ templates. Log entries are plain prose only. Links in log.md create false graph connections in Obsidian.
+- `log.md` and `facts.md` must contain no `[[wikilinks]]` of any kind — no links to wiki notes, no links to patterns/ templates.
 - Wiki notes must not link to `patterns/` templates (e.g. do not write `[[patterns/note.md]]` or `[[patterns/log_entry]]` inside a wiki note).
 
 
@@ -128,7 +128,7 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 ## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
 
-1. **Detect unprocessed items:** Compare files in `raw/` directly against notes in `wiki/` — identify raw files with no corresponding wiki note. Also check the reverse: wiki notes whose `raw:` path points to a file that does not exist (orphaned or misfiled).
+1. **Detect unprocessed items:** Recursively scan all files in `raw/` including all subdirectories at any depth (e.g. `raw/my-writing/unfinished/`, `raw/about-me/2025/`). Compare every file against notes in `wiki/` — identify raw files with no corresponding wiki note. Do not skip files based on subdirectory names (e.g. "unfinished" is not a reason to skip). Also check the reverse: wiki notes whose `raw:` path points to a file that does not exist (orphaned or misfiled).
 2. **Process new items:** For each unprocessed raw file, create a wiki note following `patterns/note.md`. When processing a document not created by me, always ask if I read it first.
 3. **Update `persona/`:** If any new `raw/about-me/` items were processed, update the relevant `persona/` documents to reflect the new information.
 4. **Validate raw paths:** For every wiki note, verify that the file(s) in the `raw:` frontmatter field exist at that exact path. Fix any broken or missing subdirectory references.
