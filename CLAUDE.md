@@ -10,6 +10,7 @@ patterns/
 patterns/facts.md
 patterns/log_entry.md
 patterns/note.md
+patterns/url_entry.md
 persona/
 raw/
 wiki/
@@ -17,6 +18,8 @@ checklist.md
 facts.md
 index.md
 log.md
+raw/URLs/
+raw/URLs/urls.md
 ```
 Delete `Welcome.md` if it exists in the root directory (Obsidian creates this file automatically).
 
@@ -82,6 +85,43 @@ type: template
 ---
 ```
 
+**`patterns/url_entry.md`**
+```
+---
+name: URL Entry Template
+description: Template for entries in raw/URLs/urls.md — one entry per online article queued for processing
+type: template
+---
+
+## Format
+
+\```
+- [ ] https://... — optional short label
+- [x] https://... — optional short label → [[Wiki Note Title]]
+\```
+
+## Rules
+- `[ ]` = queued, not yet processed into a wiki note
+- `[x]` = processed; append `→ [[Wiki Note Title]]` to link back to the created note
+- The short label is optional but recommended when the URL is not self-explanatory
+- `[x]` entries are marked in place — no sections, no moving lines
+
+## Wiki note for a URL-sourced article
+
+\```yaml
+---
+title:
+author:
+source: https://...
+year_published:
+tags: []
+raw: "[[raw/URLs/urls.md]]"
+type:
+read_status:
+---
+\```
+```
+
 **`patterns/facts.md`**
 ```
 ---
@@ -128,16 +168,25 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 ## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
 
-1. **Detect unprocessed items:** Recursively scan all files in `raw/` including all subdirectories at any depth (e.g. `raw/my-writing/unfinished/`, `raw/about-me/2025/`). Compare every file against notes in `wiki/` — identify raw files with no corresponding wiki note. Do not skip files based on subdirectory names (e.g. "unfinished" is not a reason to skip). Also check the reverse: wiki notes whose `raw:` path points to a file that does not exist (orphaned or misfiled).
-2. **Process new items:** For each unprocessed raw file, create a wiki note following `patterns/note.md`. When processing a document not created by me, always ask if I read it first.
-3. **Update `persona/`:** If any new `raw/about-me/` items were processed, update the relevant `persona/` documents to reflect the new information.
-4. **Validate raw paths:** For every wiki note, verify that the file(s) in the `raw:` frontmatter field exist at that exact path. Fix any broken or missing subdirectory references.
-5. **Check MOC currency:** For each MOC document, verify that all notes in its folder are listed and the note count is accurate. Update where needed.
-6. **Flag stubs:** Identify notes where Core idea or Key principles are empty or contain only placeholder text. Report these — do not auto-fill.
-7. **Check template compliance:** Verify all wiki notes (excluding MOCs) have the required frontmatter fields and five body sections.
+1. **Detect unprocessed items:** Recursively scan all files in `raw/` including all subdirectories at any depth. Do not skip subdirectories by name (e.g. `unfinished/` is not a reason to skip). A raw file is only considered covered if (a) a wiki note exists with a matching title AND (b) that note's `raw:` frontmatter path resolves to the file on disk. A title match alone is not sufficient.
+2. **Process URLs:** Read `raw/URLs/urls.md` and collect all unchecked `[ ]` entries. For each URL, fetch content using WebFetch. If a URL is unreachable, flag and skip. Ask which URLs have been read before creating notes (read_status depends on the answer). Create one wiki note per URL following `patterns/note.md`; set `source:` to the URL and `raw: "[[raw/URLs/urls.md]]"`. Place notes in the most appropriate `wiki/` subfolder. Mark each entry as `[x]` and append `→ [[Note Title]]` in place — do not move lines.
+3. **Process new items:** For each unprocessed raw file, create a wiki note following `patterns/note.md`. When processing a document not created by me, always ask if I read it first.
+4. **Update `persona/`:** If any new `raw/about-me/` items were processed, update the relevant `persona/` documents to reflect the new information.
+5. **Validate raw paths — exhaustively:** For every wiki note (not just recently edited ones), verify each path in the `raw:` frontmatter exists on disk. Do not spot-check; check all notes. Fix broken paths and report every one found — common cause is directory renames (e.g. `conferences/` → `presentations/`).
+6. **Check MOC currency:** For each MOC document, verify all notes in its folder are listed and the note count is accurate. Update where needed.
+7. **Audit note quality:** Flag notes where Core idea or Key principles are empty or contain only placeholder text (stubs), and notes missing required frontmatter fields or any of the five body sections. Report all issues — do not auto-fill.
 8. **Update `index.md`:** Ensure count matches actual wiki note total, all folders and notes are listed, and no wiki links are present.
-9. **Update `log.md`** to capture what changed (prepend, latest first).
-10. **Print a short summary** in terminal.
+9. **Update `log.md` and print summary:** Prepend a log entry capturing what changed. Print a short summary in terminal.
+
+
+## URL routine (process online articles)
+On `process urls` command:
+1. Read `raw/URLs/urls.md` and collect all unchecked `[ ]` entries. If none, report and stop.
+2. For each URL, fetch content using WebFetch. Flag and skip any that are unreachable or paywalled.
+3. Ask which URLs have been read before creating notes — can batch the question across all queued URLs.
+4. Create one wiki note per URL following `patterns/note.md`. Set `source:` to the URL; set `raw: "[[raw/URLs/urls.md]]"`. Place notes in the most appropriate `wiki/` subfolder (root for standalone articles and books; existing subfolders for content that clearly belongs to a collection).
+5. Mark each entry as `[x]` and append `→ [[Note Title]]` in place — do not move lines.
+6. Update `index.md` and prepend an entry to `log.md`.
 
 
 ## Generating a curious fact
