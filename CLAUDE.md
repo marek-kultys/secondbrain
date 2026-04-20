@@ -114,6 +114,8 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 - Log entries are prepended (newest at top).
 - All wiki notes must conform to `patterns/note.md`: meta frontmatter (name, description, type: template is for templates; notes use title/author/source/year_published/tags/raw/type) and five body sections (Core idea, Key principles, Connections, Timeline & context, My notes).
 - The controlled vocabulary for `type` lives only in `patterns/note.md` — never repeat it in individual wiki notes.
+- `log.md` must contain no `[[wikilinks]]` of any kind — no links to wiki notes, no links to patterns/ templates. Log entries are plain prose only. Links in log.md create false graph connections in Obsidian.
+- Wiki notes must not link to `patterns/` templates (e.g. do not write `[[patterns/note.md]]` or `[[patterns/log_entry]]` inside a wiki note).
 
 
 ## Templates
@@ -139,7 +141,7 @@ On every `brain routine` command, do this:
 
 
 ## Generating a curious fact
-On every `get me a fact` or `get a new fact` command:
+On every  `give me a fact` or `get me a fact` or `get a new fact` command:
 1. Search through the stored knowledge in `index.md`, `wiki/` and `raw/` and generate a new fact
 2. New fact must be an inference grounded in the vault; it must span at least 3 separate knowledge sources
 3. Summarise the fact in a few sentences and quote the sources (with page numbers)
