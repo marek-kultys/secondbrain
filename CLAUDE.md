@@ -41,6 +41,7 @@ type: template
 title:
 author:
 source:
+source_url:  # direct URL to the online version; extract from PDF footer/metadata when available; omit if no online version exists
 year_published:
 tags: []
 raw:
@@ -112,7 +113,8 @@ type: template
 ---
 title:
 author:
-source: https://...
+source: <publication or site name>
+source_url: https://...
 year_published:
 tags: []
 raw: "[[raw/URLs/urls.md]]"
@@ -147,51 +149,43 @@ Once done, log this as first action in `log.md` adhering to brain rules and temp
 
 
 ## Admin rules
-- This Obsisian vault is my digital brain. I store raw information in `raw/` and you index and manage it in `wiki/`. Use `wiki/` to retrieve information when asked about anything.
-- `index.md` is a flat catalogue of all notes in `wiki/`, grouped by folder, with a total count and last-updated date in the header. Follow `patterns/index.md`. List entries as plain text titles — no wiki links. Update `index.md` when `brain routine` is run.
-- Every significant vault operation (structural change, new knowledge, update to key documents) must be logged in `log.md` using the `patterns/log_entry.md` template.
-- Log entries must include a full timestamp: `YYYY-MM-DD HH:MM:SS` — retrieve the current time via `date '+%H:%M:%S'` before writing each entry.
-- New log entries in `log.md` and new facts in `facts.md` are prepended (newest at top).
-- All wiki notes must conform to `patterns/note.md`: meta frontmatter (name, description, type: template is for templates; notes use title/author/source/year_published/tags/raw/type) and five body sections (Core idea, Key principles, Connections, Timeline & context, My notes).
-- The controlled vocabulary for `type` lives only in `patterns/note.md` — never repeat it in individual wiki notes.
-- `log.md` and `facts.md` must contain no `[[wikilinks]]` of any kind — no links to wiki notes, no links to patterns/ templates.
-- Wiki notes must not link to `patterns/` templates (e.g. do not write `[[patterns/note.md]]` or `[[patterns/log_entry]]` inside a wiki note).
-
-
-## Templates
-- For wiki notes: follow `patterns/note.md`
-- For log entries: follow `patterns/log_entry.md`
-- For index: follow `patterns/index.md`
-- Always read the relevant template before creating a new document of that type
+- Raw information lives in `raw/`; processed knowledge in `wiki/`. Use `wiki/` to retrieve information when asked about anything.
+- `index.md` is a flat catalogue of all `wiki/` notes, grouped by folder, with a total count and last-updated date. Entries are plain text titles — no wiki links. Update when `brain routine` runs.
+- Log every significant vault operation (structural change, new knowledge, update to key documents) in `log.md` using `patterns/log_entry.md`. Timestamps must be `YYYY-MM-DD HH:MM:SS` — fetch current time with `date '+%H:%M:%S'` before writing. Prepend new entries (newest at top).
+- New facts in `facts.md` are also prepended.
+- All wiki notes must follow `patterns/note.md`: frontmatter (title/author/source/source_url/year_published/tags/raw/type/read_status) and five body sections (Core idea, Key principles, Connections, Timeline & context, My notes). Include `source_url:` only when an online version exists; omit the field otherwise.
+- The controlled vocabulary for `type` lives only in `patterns/note.md` — never repeat it in wiki notes.
+- `log.md` and `facts.md` must contain no `[[wikilinks]]`. Wiki notes must not link to `patterns/` files.
+- Always read the relevant template before creating a new document of that type.
 
 
 ## Brain routine (organise, clean up, track new knowledge)
 On every `brain routine` command, do this:
 
-1. **Detect unprocessed items:** Recursively scan all files in `raw/` including all subdirectories at any depth. Do not skip subdirectories by name (e.g. `unfinished/` is not a reason to skip). A raw file is only considered covered if (a) a wiki note exists with a matching title AND (b) that note's `raw:` frontmatter path resolves to the file on disk. A title match alone is not sufficient.
-2. **Process URLs:** Read `raw/URLs/urls.md` and collect all unchecked `[ ]` entries. For each URL, fetch content using WebFetch. If a URL is unreachable, flag and skip. Ask which URLs have been read before creating notes (read_status depends on the answer). Create one wiki note per URL following `patterns/note.md`; set `source:` to the URL and `raw: "[[raw/URLs/urls.md]]"`. Place notes in the most appropriate `wiki/` subfolder. Mark each entry as `[x]` and append `→ [[Note Title]]` in place — do not move lines.
-3. **Process new items:** For each unprocessed raw file, create a wiki note following `patterns/note.md`. When processing a document not created by me, always ask if I read it first.
-4. **Update `persona/`:** If any new `raw/about-me/` items were processed, update the relevant `persona/` documents to reflect the new information.
-5. **Validate raw paths — exhaustively:** For every wiki note (not just recently edited ones), verify each path in the `raw:` frontmatter exists on disk. Do not spot-check; check all notes. Fix broken paths and report every one found — common cause is directory renames (e.g. `conferences/` → `presentations/`).
-6. **Check MOC currency:** For each MOC document, verify all notes in its folder are listed and the note count is accurate. Update where needed.
-7. **Audit note quality:** Flag notes where Core idea or Key principles are empty or contain only placeholder text (stubs), and notes missing required frontmatter fields or any of the five body sections. Report all issues — do not auto-fill.
-8. **Update `index.md`:** Ensure count matches actual wiki note total, all folders and notes are listed, and no wiki links are present.
-9. **Update `log.md` and print summary:** Prepend a log entry capturing what changed. Print a short summary in terminal.
+1. **Detect unprocessed items:** Recursively scan all of `raw/` — no directory name (e.g. `unfinished/`) is a reason to skip. A file is covered only if (a) a matching wiki note exists AND (b) that note's `raw:` frontmatter path resolves to the file on disk. Title match alone is not sufficient.
+2. **Process URLs:** Read `raw/URLs/urls.md`, collect all `[ ]` entries. Fetch each with WebFetch; flag and skip unreachable ones. Ask which have been read (sets `read_status`). Create one wiki note per URL; set `source:` to the URL and `raw: "[[raw/URLs/urls.md]]"`. Place in the most appropriate `wiki/` subfolder. Mark `[x]` and append `→ [[Note Title]]` in place.
+3. **Process new items:** Create a wiki note for each unprocessed file. For documents not created by me, ask if I read them first. For PDFs, try `pdftotext <file> - | grep -oE 'https?://[^ )},]+' | head -1` for a source URL; for Distill papers look for the `note = {https://distill.pub/...}` BibTeX block. Set `source_url:` only if a clean canonical URL is found; omit it otherwise.
+4. **Update `persona/`:** If any new `raw/about-me/` items were processed, update the relevant `persona/` documents.
+5. **Validate raw paths — exhaustively:** Verify every wiki note's `raw:` paths exist on disk — check all notes, not just recent ones. Fix and report every broken path (common cause: directory renames).
+6. **Check MOC currency:** Verify all notes in each MOC folder are listed and counts are accurate. Update where needed.
+7. **Audit note quality:** Flag stubs (Core idea or Key principles empty or placeholder) and notes missing required frontmatter fields or any body section. Report all — do not auto-fill.
+8. **Update `index.md`:** Ensure count matches actual total, all folders and notes are listed, no wiki links present.
+9. **Update `log.md` and print summary:** Prepend a log entry capturing what changed. Print a short summary.
 
 
 ## URL routine (process online articles)
 On `process urls` command:
-1. Read `raw/URLs/urls.md` and collect all unchecked `[ ]` entries. If none, report and stop.
-2. For each URL, fetch content using WebFetch. Flag and skip any that are unreachable or paywalled.
-3. Ask which URLs have been read before creating notes — can batch the question across all queued URLs.
-4. Create one wiki note per URL following `patterns/note.md`. Set `source:` to the URL; set `raw: "[[raw/URLs/urls.md]]"`. Place notes in the most appropriate `wiki/` subfolder (root for standalone articles and books; existing subfolders for content that clearly belongs to a collection).
-5. Mark each entry as `[x]` and append `→ [[Note Title]]` in place — do not move lines.
+1. Read `raw/URLs/urls.md`, collect all `[ ]` entries. If none, report and stop.
+2. Fetch each URL with WebFetch. Flag and skip unreachable or paywalled ones.
+3. Ask which have been read before creating notes — batch the question across all queued URLs.
+4. Create one wiki note per URL following `patterns/note.md`. Set `source:` to the URL and `raw: "[[raw/URLs/urls.md]]"`. Place in the most appropriate `wiki/` subfolder (root for standalone articles; existing subfolders for collection content).
+5. Mark each entry `[x]` and append `→ [[Note Title]]` in place — do not move lines.
 6. Update `index.md` and prepend an entry to `log.md`.
 
 
 ## Generating a curious fact
 On every  `give me a fact` or `get me a fact` or `get a new fact` command:
-1. Search through the stored knowledge in `index.md`, `wiki/` and `raw/` and generate a new fact
+1. Search `wiki/` and `raw/` and generate a new fact
 2. New fact must be an inference grounded in the vault; it must span at least 3 separate knowledge sources
 3. Summarise the fact in a few sentences and quote the sources (with page numbers)
 4. Prepend the new fact to `facts.md` following `patterns/facts.md`
