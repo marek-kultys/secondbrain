@@ -171,7 +171,7 @@ On every `brain routine` command, do this:
 6. **Check MOC currency:** Verify all notes in each MOC folder are listed and counts are accurate. Update where needed.
 7. **Audit note quality:** Flag stubs (Core idea or Key principles empty or placeholder) and notes missing required frontmatter fields or any body section. Report all — do not auto-fill.
 8. **Update `index.md`:** Ensure count matches actual total, all folders and notes are listed, no wiki links present.
-9. **Update `log.md` and print summary:** Prepend a log entry capturing what changed. Print a short summary.
+9. **Update `log.md` and print summary:** Prepend a log entry capturing what changed. Compress log entries older than 4 months. Print a short summary.
 
 
 ## URL routine (process online articles)
